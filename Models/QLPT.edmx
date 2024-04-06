@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLPTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChauNho">
+          <Key>
+            <PropertyRef Name="MaChau" />
+          </Key>
+          <Property Name="MaChau" Type="int" Nullable="false" />
+          <Property Name="MaHo" Type="int" />
+          <Property Name="TenChau" Type="nvarchar" MaxLength="255" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="Tentruong" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lop" Type="nvarchar" MaxLength="50" />
+          <Property Name="ThanhTich" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="HoGiaDinh">
+          <Key>
+            <PropertyRef Name="MaHo" />
+          </Key>
+          <Property Name="MaHo" Type="int" Nullable="false" />
+          <Property Name="TenHo" Type="nvarchar" MaxLength="255" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="255" />
+          <Property Name="sdt" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PhanPhoi">
+          <Key>
+            <PropertyRef Name="MaPhanPhoi" />
+          </Key>
+          <Property Name="MaPhanPhoi" Type="int" Nullable="false" />
+          <Property Name="NgayPhanPhoi" Type="date" />
+          <Property Name="MaHo" Type="int" />
+          <Property Name="MaQua" Type="int" />
+          <Property Name="MaThuong" Type="int" />
+          <Property Name="SoLuong" Type="int" />
+        </EntityType>
+        <EntityType Name="PhanQua">
+          <Key>
+            <PropertyRef Name="MaQua" />
+          </Key>
+          <Property Name="MaQua" Type="int" Nullable="false" />
+          <Property Name="TenQua" Type="nvarchar" MaxLength="255" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="GiaTri" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="PhanThuong">
+          <Key>
+            <PropertyRef Name="MaThuong" />
+          </Key>
+          <Property Name="MaThuong" Type="int" Nullable="false" />
+          <Property Name="TenThuong" Type="nvarchar" MaxLength="255" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="GiaTri" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <Association Name="FK__ChauNho__MaHo__4BAC3F29">
+          <End Role="HoGiaDinh" Type="Self.HoGiaDinh" Multiplicity="0..1" />
+          <End Role="ChauNho" Type="Self.ChauNho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoGiaDinh">
+              <PropertyRef Name="MaHo" />
+            </Principal>
+            <Dependent Role="ChauNho">
+              <PropertyRef Name="MaHo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanPhoi__MaHo__52593CB8">
+          <End Role="HoGiaDinh" Type="Self.HoGiaDinh" Multiplicity="0..1" />
+          <End Role="PhanPhoi" Type="Self.PhanPhoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoGiaDinh">
+              <PropertyRef Name="MaHo" />
+            </Principal>
+            <Dependent Role="PhanPhoi">
+              <PropertyRef Name="MaHo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanPhoi__MaQua__534D60F1">
+          <End Role="PhanQua" Type="Self.PhanQua" Multiplicity="0..1" />
+          <End Role="PhanPhoi" Type="Self.PhanPhoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhanQua">
+              <PropertyRef Name="MaQua" />
+            </Principal>
+            <Dependent Role="PhanPhoi">
+              <PropertyRef Name="MaQua" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanPhoi__MaThuo__5441852A">
+          <End Role="PhanThuong" Type="Self.PhanThuong" Multiplicity="0..1" />
+          <End Role="PhanPhoi" Type="Self.PhanPhoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhanThuong">
+              <PropertyRef Name="MaThuong" />
+            </Principal>
+            <Dependent Role="PhanPhoi">
+              <PropertyRef Name="MaThuong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLPTModelStoreContainer">
+          <EntitySet Name="ChauNho" EntityType="Self.ChauNho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoGiaDinh" EntityType="Self.HoGiaDinh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanPhoi" EntityType="Self.PhanPhoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanQua" EntityType="Self.PhanQua" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanThuong" EntityType="Self.PhanThuong" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ChauNho__MaHo__4BAC3F29" Association="Self.FK__ChauNho__MaHo__4BAC3F29">
+            <End Role="HoGiaDinh" EntitySet="HoGiaDinh" />
+            <End Role="ChauNho" EntitySet="ChauNho" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanPhoi__MaHo__52593CB8" Association="Self.FK__PhanPhoi__MaHo__52593CB8">
+            <End Role="HoGiaDinh" EntitySet="HoGiaDinh" />
+            <End Role="PhanPhoi" EntitySet="PhanPhoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanPhoi__MaQua__534D60F1" Association="Self.FK__PhanPhoi__MaQua__534D60F1">
+            <End Role="PhanQua" EntitySet="PhanQua" />
+            <End Role="PhanPhoi" EntitySet="PhanPhoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanPhoi__MaThuo__5441852A" Association="Self.FK__PhanPhoi__MaThuo__5441852A">
+            <End Role="PhanThuong" EntitySet="PhanThuong" />
+            <End Role="PhanPhoi" EntitySet="PhanPhoi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLPTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ChauNho">
+          <Key>
+            <PropertyRef Name="MaChau" />
+          </Key>
+          <Property Name="MaChau" Type="Int32" Nullable="false" />
+          <Property Name="MaHo" Type="Int32" />
+          <Property Name="TenChau" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="Tentruong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThanhTich" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HoGiaDinh" Relationship="Self.FK__ChauNho__MaHo__4BAC3F29" FromRole="ChauNho" ToRole="HoGiaDinh" />
+        </EntityType>
+        <EntityType Name="HoGiaDinh">
+          <Key>
+            <PropertyRef Name="MaHo" />
+          </Key>
+          <Property Name="MaHo" Type="Int32" Nullable="false" />
+          <Property Name="TenHo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sdt" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChauNhoes" Relationship="Self.FK__ChauNho__MaHo__4BAC3F29" FromRole="HoGiaDinh" ToRole="ChauNho" />
+          <NavigationProperty Name="PhanPhois" Relationship="Self.FK__PhanPhoi__MaHo__52593CB8" FromRole="HoGiaDinh" ToRole="PhanPhoi" />
+        </EntityType>
+        <EntityType Name="PhanPhoi">
+          <Key>
+            <PropertyRef Name="MaPhanPhoi" />
+          </Key>
+          <Property Name="MaPhanPhoi" Type="Int32" Nullable="false" />
+          <Property Name="NgayPhanPhoi" Type="DateTime" Precision="0" />
+          <Property Name="MaHo" Type="Int32" />
+          <Property Name="MaQua" Type="Int32" />
+          <Property Name="MaThuong" Type="Int32" />
+          <Property Name="SoLuong" Type="Int32" />
+          <NavigationProperty Name="HoGiaDinh" Relationship="Self.FK__PhanPhoi__MaHo__52593CB8" FromRole="PhanPhoi" ToRole="HoGiaDinh" />
+          <NavigationProperty Name="PhanQua" Relationship="Self.FK__PhanPhoi__MaQua__534D60F1" FromRole="PhanPhoi" ToRole="PhanQua" />
+          <NavigationProperty Name="PhanThuong" Relationship="Self.FK__PhanPhoi__MaThuo__5441852A" FromRole="PhanPhoi" ToRole="PhanThuong" />
+        </EntityType>
+        <EntityType Name="PhanQua">
+          <Key>
+            <PropertyRef Name="MaQua" />
+          </Key>
+          <Property Name="MaQua" Type="Int32" Nullable="false" />
+          <Property Name="TenQua" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTri" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="PhanPhois" Relationship="Self.FK__PhanPhoi__MaQua__534D60F1" FromRole="PhanQua" ToRole="PhanPhoi" />
+        </EntityType>
+        <EntityType Name="PhanThuong">
+          <Key>
+            <PropertyRef Name="MaThuong" />
+          </Key>
+          <Property Name="MaThuong" Type="Int32" Nullable="false" />
+          <Property Name="TenThuong" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTri" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="PhanPhois" Relationship="Self.FK__PhanPhoi__MaThuo__5441852A" FromRole="PhanThuong" ToRole="PhanPhoi" />
+        </EntityType>
+        <Association Name="FK__ChauNho__MaHo__4BAC3F29">
+          <End Role="HoGiaDinh" Type="Self.HoGiaDinh" Multiplicity="0..1" />
+          <End Role="ChauNho" Type="Self.ChauNho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoGiaDinh">
+              <PropertyRef Name="MaHo" />
+            </Principal>
+            <Dependent Role="ChauNho">
+              <PropertyRef Name="MaHo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanPhoi__MaHo__52593CB8">
+          <End Role="HoGiaDinh" Type="Self.HoGiaDinh" Multiplicity="0..1" />
+          <End Role="PhanPhoi" Type="Self.PhanPhoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoGiaDinh">
+              <PropertyRef Name="MaHo" />
+            </Principal>
+            <Dependent Role="PhanPhoi">
+              <PropertyRef Name="MaHo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanPhoi__MaQua__534D60F1">
+          <End Role="PhanQua" Type="Self.PhanQua" Multiplicity="0..1" />
+          <End Role="PhanPhoi" Type="Self.PhanPhoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhanQua">
+              <PropertyRef Name="MaQua" />
+            </Principal>
+            <Dependent Role="PhanPhoi">
+              <PropertyRef Name="MaQua" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanPhoi__MaThuo__5441852A">
+          <End Role="PhanThuong" Type="Self.PhanThuong" Multiplicity="0..1" />
+          <End Role="PhanPhoi" Type="Self.PhanPhoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhanThuong">
+              <PropertyRef Name="MaThuong" />
+            </Principal>
+            <Dependent Role="PhanPhoi">
+              <PropertyRef Name="MaThuong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLPTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChauNhoes" EntityType="Self.ChauNho" />
+          <EntitySet Name="HoGiaDinhs" EntityType="Self.HoGiaDinh" />
+          <EntitySet Name="PhanPhois" EntityType="Self.PhanPhoi" />
+          <EntitySet Name="PhanQuas" EntityType="Self.PhanQua" />
+          <EntitySet Name="PhanThuongs" EntityType="Self.PhanThuong" />
+          <AssociationSet Name="FK__ChauNho__MaHo__4BAC3F29" Association="Self.FK__ChauNho__MaHo__4BAC3F29">
+            <End Role="HoGiaDinh" EntitySet="HoGiaDinhs" />
+            <End Role="ChauNho" EntitySet="ChauNhoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanPhoi__MaHo__52593CB8" Association="Self.FK__PhanPhoi__MaHo__52593CB8">
+            <End Role="HoGiaDinh" EntitySet="HoGiaDinhs" />
+            <End Role="PhanPhoi" EntitySet="PhanPhois" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanPhoi__MaQua__534D60F1" Association="Self.FK__PhanPhoi__MaQua__534D60F1">
+            <End Role="PhanQua" EntitySet="PhanQuas" />
+            <End Role="PhanPhoi" EntitySet="PhanPhois" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanPhoi__MaThuo__5441852A" Association="Self.FK__PhanPhoi__MaThuo__5441852A">
+            <End Role="PhanThuong" EntitySet="PhanThuongs" />
+            <End Role="PhanPhoi" EntitySet="PhanPhois" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLPTModelStoreContainer" CdmEntityContainer="QLPTEntities">
+          <EntitySetMapping Name="ChauNhoes">
+            <EntityTypeMapping TypeName="QLPTModel.ChauNho">
+              <MappingFragment StoreEntitySet="ChauNho">
+                <ScalarProperty Name="MaChau" ColumnName="MaChau" />
+                <ScalarProperty Name="MaHo" ColumnName="MaHo" />
+                <ScalarProperty Name="TenChau" ColumnName="TenChau" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Tentruong" ColumnName="Tentruong" />
+                <ScalarProperty Name="Lop" ColumnName="Lop" />
+                <ScalarProperty Name="ThanhTich" ColumnName="ThanhTich" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoGiaDinhs">
+            <EntityTypeMapping TypeName="QLPTModel.HoGiaDinh">
+              <MappingFragment StoreEntitySet="HoGiaDinh">
+                <ScalarProperty Name="MaHo" ColumnName="MaHo" />
+                <ScalarProperty Name="TenHo" ColumnName="TenHo" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="sdt" ColumnName="sdt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanPhois">
+            <EntityTypeMapping TypeName="QLPTModel.PhanPhoi">
+              <MappingFragment StoreEntitySet="PhanPhoi">
+                <ScalarProperty Name="MaPhanPhoi" ColumnName="MaPhanPhoi" />
+                <ScalarProperty Name="NgayPhanPhoi" ColumnName="NgayPhanPhoi" />
+                <ScalarProperty Name="MaHo" ColumnName="MaHo" />
+                <ScalarProperty Name="MaQua" ColumnName="MaQua" />
+                <ScalarProperty Name="MaThuong" ColumnName="MaThuong" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanQuas">
+            <EntityTypeMapping TypeName="QLPTModel.PhanQua">
+              <MappingFragment StoreEntitySet="PhanQua">
+                <ScalarProperty Name="MaQua" ColumnName="MaQua" />
+                <ScalarProperty Name="TenQua" ColumnName="TenQua" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanThuongs">
+            <EntityTypeMapping TypeName="QLPTModel.PhanThuong">
+              <MappingFragment StoreEntitySet="PhanThuong">
+                <ScalarProperty Name="MaThuong" ColumnName="MaThuong" />
+                <ScalarProperty Name="TenThuong" ColumnName="TenThuong" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

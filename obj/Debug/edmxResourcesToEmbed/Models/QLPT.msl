@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QLPTModelStoreContainer" CdmEntityContainer="QLPTEntities">
+    <EntitySetMapping Name="ChauNhoes">
+      <EntityTypeMapping TypeName="QLPTModel.ChauNho">
+        <MappingFragment StoreEntitySet="ChauNho">
+          <ScalarProperty Name="MaChau" ColumnName="MaChau" />
+          <ScalarProperty Name="MaHo" ColumnName="MaHo" />
+          <ScalarProperty Name="TenChau" ColumnName="TenChau" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="Tentruong" ColumnName="Tentruong" />
+          <ScalarProperty Name="Lop" ColumnName="Lop" />
+          <ScalarProperty Name="ThanhTich" ColumnName="ThanhTich" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HoGiaDinhs">
+      <EntityTypeMapping TypeName="QLPTModel.HoGiaDinh">
+        <MappingFragment StoreEntitySet="HoGiaDinh">
+          <ScalarProperty Name="MaHo" ColumnName="MaHo" />
+          <ScalarProperty Name="TenHo" ColumnName="TenHo" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="sdt" ColumnName="sdt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhanPhois">
+      <EntityTypeMapping TypeName="QLPTModel.PhanPhoi">
+        <MappingFragment StoreEntitySet="PhanPhoi">
+          <ScalarProperty Name="MaPhanPhoi" ColumnName="MaPhanPhoi" />
+          <ScalarProperty Name="NgayPhanPhoi" ColumnName="NgayPhanPhoi" />
+          <ScalarProperty Name="MaHo" ColumnName="MaHo" />
+          <ScalarProperty Name="MaQua" ColumnName="MaQua" />
+          <ScalarProperty Name="MaThuong" ColumnName="MaThuong" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhanQuas">
+      <EntityTypeMapping TypeName="QLPTModel.PhanQua">
+        <MappingFragment StoreEntitySet="PhanQua">
+          <ScalarProperty Name="MaQua" ColumnName="MaQua" />
+          <ScalarProperty Name="TenQua" ColumnName="TenQua" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhanThuongs">
+      <EntityTypeMapping TypeName="QLPTModel.PhanThuong">
+        <MappingFragment StoreEntitySet="PhanThuong">
+          <ScalarProperty Name="MaThuong" ColumnName="MaThuong" />
+          <ScalarProperty Name="TenThuong" ColumnName="TenThuong" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
